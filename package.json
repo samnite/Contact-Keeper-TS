@@ -1,0 +1,25 @@
+{
+  "name": "contact-keeper-ts",
+  "version": "1.0.0",
+  "description": "Contact manager app",
+  "main": "server.js",
+  "repository": "https://github.com/samnite/Contact-Keeper-TS.git",
+  "author": "Alexander Gribenchenko <samnite87@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.2.2",
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.3"
+  }
+}
