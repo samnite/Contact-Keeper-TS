@@ -16,7 +16,13 @@
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.1"
+    "mongoose": "^5.7.1",
+    "prettier": "^1.18.2"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "bracketSpacing": true
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
