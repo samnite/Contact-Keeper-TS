@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://samnite:7184109@contactkeeper-zawgp.gcp.mongodb.net/test?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://samnite:7184109@contactkeeper-zawgp.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
 }
