@@ -1,10 +1,15 @@
 import { createContext } from 'react';
 
-interface Methods {}
+interface Methods {
+  addContact: (contact: Contact) => void;
+  deleteContact: (id: string) => void;
+  setCurrent: (contact: Contact) => void;
+  clearCurrent: () => void;
+}
 
-interface Contact {
+export interface Contact extends Methods {
   name?: string;
-  id?: string | number;
+  id?: string;
   email?: string;
   phone?: string;
   type?: string;
@@ -12,6 +17,7 @@ interface Contact {
 
 interface Contacts extends Contact {
   contacts: ContactStateTypes[];
+  current: Contact | null;
 }
 
 export interface ContactStateTypes extends Contacts {
@@ -22,7 +28,6 @@ export interface ContactStateTypes extends Contacts {
     phone: string;
     type: string;
   };
-  addContact: (contact: Contact) => void;
 }
 
 const ContactContext = createContext({} as ContactStateTypes);

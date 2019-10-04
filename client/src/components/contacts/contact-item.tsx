@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import { ContactStateTypes } from '../../context/contact/contact-context';
+import ContactContext from '../../context/contact/contact-context';
 
 interface OwnProps {
   contactItem: ContactStateTypes;
@@ -8,8 +9,15 @@ interface OwnProps {
 type Props = OwnProps;
 
 const ContactItem: FunctionComponent<Props> = ({ contactItem }) => {
-  //@ts-ignore
+  const contactContext = useContext(ContactContext);
+  const { deleteContact, setCurrent, clearCurrent } = contactContext;
+
   const { name, id, email, phone, type } = contactItem;
+
+  const onDelete = () => {
+    if (id) deleteContact(id);
+    clearCurrent();
+  };
 
   return (
     <div className="card bg-light">
@@ -39,8 +47,15 @@ const ContactItem: FunctionComponent<Props> = ({ contactItem }) => {
         )}
       </ul>
       <p>
-        <button className="btn btn-dark btn-sm">Edit</button>
-        <button className="btn btn-danger btn-sm">Delete</button>
+        <button
+          className="btn btn-dark btn-sm"
+          onClick={() => setCurrent(contactItem)}
+        >
+          Edit
+        </button>
+        <button className="btn btn-danger btn-sm" onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );

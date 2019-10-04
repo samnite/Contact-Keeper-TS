@@ -8,6 +8,7 @@ import {
   FILTER_CONTACT,
   CLEAR_FILTER
 } from '../types';
+import { ContactStateTypes } from './contact-context';
 
 //@ts-ignore
 export default (state, action) => {
@@ -17,6 +18,25 @@ export default (state, action) => {
         ...state,
         contacts: [...state.contacts, action.payload]
       };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact: ContactStateTypes) => contact.id != action.payload
+        )
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload
+      };
+    case CLEAR_CURRENT: {
+      return {
+        ...state,
+        current: null
+      };
+    }
+
     default:
       return state;
   }
