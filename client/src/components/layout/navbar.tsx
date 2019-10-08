@@ -1,6 +1,7 @@
 import React, { FunctionComponent, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/auth-context';
+import ContactContext from '../../context/contact/contact-context';
 
 interface OwnProps {
   title?: string;
@@ -11,11 +12,14 @@ type Props = OwnProps;
 
 const Navbar: FunctionComponent<Props> = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
+  const contactContext = useContext(ContactContext);
 
   const { isAuthenticated, logout, user } = authContext;
+  const { clearContacts } = contactContext;
 
   const onLogout = () => {
     logout();
+    clearContacts();
   };
 
   const authLinks = (

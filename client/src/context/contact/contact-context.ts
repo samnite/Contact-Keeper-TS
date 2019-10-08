@@ -7,7 +7,9 @@ interface Methods {
     type: string;
     email: string;
   }) => void;
+  getContacts: () => void;
   deleteContact: (id: string) => void;
+  clearContacts: () => void;
   setCurrent: (contact: Contact) => void;
   clearCurrent: () => void;
   filterContacts: (text: string) => void;
@@ -18,6 +20,7 @@ interface Methods {
     type: string;
     email: string;
   }) => void;
+  loading?: boolean;
 }
 
 export interface Contact extends Methods {
