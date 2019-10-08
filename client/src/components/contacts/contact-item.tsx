@@ -12,10 +12,10 @@ const ContactItem: FunctionComponent<Props> = ({ contactItem }) => {
   const contactContext = useContext(ContactContext);
   const { deleteContact, setCurrent, clearCurrent } = contactContext;
 
-  const { name, id, email, phone, type } = contactItem;
+  const { name, _id, email, phone, type } = contactItem;
 
   const onDelete = () => {
-    if (id) deleteContact(id);
+    if (_id) deleteContact(_id);
     clearCurrent();
   };
 

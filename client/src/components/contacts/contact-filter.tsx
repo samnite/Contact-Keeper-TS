@@ -29,7 +29,7 @@ const ContactFilter: FunctionComponent<Props> = () => {
       <input
         ref={text}
         type="text"
-        placeholder="Filter Contacts ..."
+        placeholder="Filter Contacts (name/email)..."
         onChange={onChange}
       />
     </form>
