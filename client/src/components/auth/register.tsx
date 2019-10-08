@@ -7,6 +7,7 @@ import React, {
 import AlertContext from '../../context/alert/alert-context';
 import AuthContext from '../../context/auth/auth-context';
 import { History, LocationState } from 'history';
+import validator from 'validator';
 
 interface OwnProps {
   history: History<LocationState>;
@@ -46,8 +47,8 @@ const Register: FunctionComponent<Props> = props => {
     setUser({ ...user, [e.target.name]: e.target.value });
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (name === '' || email === '' || password === '') {
-      setAlert('Please enter all fields', 'danger');
+    if (!validator.isEmail(email)) {
+      setAlert('Please enter a correct email', 'danger');
     } else if (password !== password2) {
       setAlert('Password do not match', 'danger');
     } else {

@@ -48,7 +48,7 @@ const Login: FunctionComponent<Props> = props => {
     e.preventDefault();
     // Special for Mr. Punk implemented email validator
     if (!validator.isEmail(email)) {
-      setAlert('Please enter a valid email', 'danger');
+      setAlert('Please enter a correct email', 'danger');
     } else {
       login({ email, password });
     }
