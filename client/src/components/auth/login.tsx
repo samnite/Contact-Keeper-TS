@@ -7,6 +7,7 @@ import React, {
 import AuthContext from '../../context/auth/auth-context';
 import AlertContext from '../../context/alert/alert-context';
 import { History, LocationState } from 'history';
+import validator from 'validator';
 
 interface OwnProps {
   history: History<LocationState>;
@@ -45,8 +46,9 @@ const Login: FunctionComponent<Props> = props => {
     setUser({ ...user, [e.target.name]: e.target.value });
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (email === '' || password === '') {
-      setAlert('Please fill in all fields', 'danger');
+    // Special for Mr. Punk implemented email validator
+    if (!validator.isEmail(email)) {
+      setAlert('Please enter a valid email', 'danger');
     } else {
       login({ email, password });
     }
