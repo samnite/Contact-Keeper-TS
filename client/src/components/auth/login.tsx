@@ -26,10 +26,11 @@ const Login: FunctionComponent<Props> = props => {
       props.history.push('/');
     }
 
-    if (error === 'Invalid credentials') {
+    if (error) {
       setAlert(error, 'danger');
       clearErrors();
     }
+
     //eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 

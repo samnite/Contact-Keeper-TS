@@ -70,10 +70,17 @@ const AuthState = (props: Props) => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       loadUser();
     } catch (err) {
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: err.response.data.msg
-      });
+      if (err.response.data.errors) {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: err.response.data.errors[0].msg
+        });
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: err.response.data.msg
+        });
+      }
     }
   };
   // Logout
