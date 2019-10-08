@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import AuthContext, { FormDataTypes } from './auth-context';
 import authReducer from './auth-reducer';
 import setAuthToken from '../../utils/set-auth-token';
@@ -29,7 +29,6 @@ const AuthState = (props: Props) => {
     error: null,
     user: null
   };
-  //@ts-ignore
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
@@ -46,12 +45,6 @@ const AuthState = (props: Props) => {
   };
   // Register User
   const register = async (formData: FormDataTypes) => {
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // };
-
     try {
       const res = await axios.post('/api/users', formData, Config);
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });

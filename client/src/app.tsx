@@ -18,11 +18,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const App: React.FC<Props> = () => {
+const App: React.FC = () => {
   return (
     <AuthState>
       <ContactState>

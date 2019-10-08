@@ -1,7 +1,6 @@
-import React, { FunctionComponent, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
-import uuid from 'uuid';
-import ContactContext, { Contact, ContactStateTypes } from './contact-context';
+import ContactContext, { Contact } from './contact-context';
 import contactReducer from './contact-reducer';
 import {
   ADD_CONTACT,
@@ -30,7 +29,6 @@ const ContactState = (props: Props) => {
     filtered: null,
     error: null
   };
-  //@ts-ignore
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Get Contacts

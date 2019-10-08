@@ -1,10 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const About: FunctionComponent<Props> = props => {
+const About: FunctionComponent = () => {
   return (
     <div>
       <h1>About this app</h1>

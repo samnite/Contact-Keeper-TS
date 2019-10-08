@@ -6,11 +6,7 @@ import React, {
 } from 'react';
 import ContactContext from '../../context/contact/contact-context';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const ContactForm: FunctionComponent<Props> = () => {
+const ContactForm: FunctionComponent = () => {
   const contactContext = useContext(ContactContext);
 
   const { addContact, current, clearCurrent, updateContact } = contactContext;

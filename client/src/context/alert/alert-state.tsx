@@ -1,6 +1,6 @@
-import React, { FunctionComponent, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import uuid from 'uuid';
-import AlertContext from './alert-context';
+import AlertContext, { Alert } from './alert-context';
 import alertReducer from './alert-reducer';
 import { SET_ALERT, REMOVE_ALERT } from '../types';
 
@@ -11,9 +11,7 @@ interface OwnProps {
 type Props = OwnProps;
 
 const AlertState = (props: Props) => {
-  //@ts-ignore
-  const initialState = [];
-  //@ts-ignore
+  const initialState: Alert[] = [];
   const [state, dispatch] = useReducer(alertReducer, initialState);
 
   // Set Alert

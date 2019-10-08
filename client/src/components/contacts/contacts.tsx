@@ -11,11 +11,7 @@ import ContactContext, {
 } from '../../context/contact/contact-context';
 import Spinner from '../layout/spinner';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Contacts: FunctionComponent<Props> = () => {
+const Contacts: FunctionComponent = () => {
   const contactContext = useContext<ContactStateTypes>(ContactContext);
 
   const { contacts, filtered, getContacts, loading } = contactContext;

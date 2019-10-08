@@ -4,11 +4,7 @@ import ContactForm from '../contacts/contact-form';
 import ContactFilter from '../contacts/contact-filter';
 import AuthContext from '../../context/auth/auth-context';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const Home: FunctionComponent<Props> = props => {
+const Home: FunctionComponent = () => {
   const authContext = useContext(AuthContext);
 
   useEffect(() => {

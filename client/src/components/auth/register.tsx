@@ -30,7 +30,7 @@ const Register: FunctionComponent<Props> = props => {
       setAlert(error, 'danger');
       clearErrors();
     }
-    //es-lint-disable-next-line
+    //eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({

@@ -1,11 +1,7 @@
 import React, { FunctionComponent, useContext, useRef, useEffect } from 'react';
 import ContactContext from '../../context/contact/contact-context';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-const ContactFilter: FunctionComponent<Props> = () => {
+const ContactFilter: FunctionComponent = () => {
   const contactContext = useContext(ContactContext);
   //@ts-ignore
   const text = useRef<HTMLInputElement>('');

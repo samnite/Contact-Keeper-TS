@@ -1,4 +1,3 @@
-import React, { FunctionComponent } from 'react';
 import {
   ADD_CONTACT,
   DELETE_CONTACT,
@@ -13,8 +12,7 @@ import {
 } from '../types';
 import { Contact, ContactStateTypes } from './contact-context';
 
-//@ts-ignore
-export default (state, action) => {
+export default (state: any, action: { type: string; payload?: any }) => {
   switch (action.type) {
     case GET_CONTACTS:
       return {
@@ -40,7 +38,7 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.filter(
-          (contact: ContactStateTypes) => contact._id != action.payload
+          (contact: ContactStateTypes) => contact._id !== action.payload
         ),
         loading: false
       };

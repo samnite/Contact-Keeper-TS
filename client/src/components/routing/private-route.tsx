@@ -1,9 +1,4 @@
-import React, {
-  ComponentElement,
-  ComponentType,
-  FunctionComponent,
-  useContext
-} from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/auth-context';
 

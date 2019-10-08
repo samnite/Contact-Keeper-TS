@@ -1,12 +1,7 @@
 import { SET_ALERT, REMOVE_ALERT } from '../types';
 import { Alert } from './alert-context';
 
-interface OwnProps {}
-
-type Props = OwnProps;
-
-//@ts-ignore
-export default (state, action) => {
+export default (state: any, action: { type: string; payload?: any }) => {
   switch (action.type) {
     case SET_ALERT:
       return [...state, action.payload];
