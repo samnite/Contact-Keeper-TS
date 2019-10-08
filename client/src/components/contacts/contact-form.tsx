@@ -5,11 +5,15 @@ import React, {
   useState
 } from 'react';
 import ContactContext from '../../context/contact/contact-context';
+import validator from 'validator';
+import AlertContext from '../../context/alert/alert-context';
 
 const ContactForm: FunctionComponent = () => {
   const contactContext = useContext(ContactContext);
+  const alertContext = useContext(AlertContext);
 
   const { addContact, current, clearCurrent, updateContact } = contactContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -43,12 +47,16 @@ const ContactForm: FunctionComponent = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    if (current === null) {
-      addContact(contact);
+    if (!validator.isEmail(email)) {
+      setAlert('Please enter a correct email', 'danger');
     } else {
-      updateContact(contact);
+      if (current === null) {
+        addContact(contact);
+      } else {
+        updateContact(contact);
+      }
+      setContact({ name: '', email: '', phone: '', type: 'personal' });
     }
-    setContact({ name: '', email: '', phone: '', type: 'personal' });
   };
 
   return (
@@ -62,6 +70,7 @@ const ContactForm: FunctionComponent = () => {
         name="name"
         value={name}
         onChange={onChange}
+        required
       />
       <input
         type="email"
@@ -69,6 +78,7 @@ const ContactForm: FunctionComponent = () => {
         name="email"
         value={email}
         onChange={onChange}
+        required
       />
       <input
         type="text"
