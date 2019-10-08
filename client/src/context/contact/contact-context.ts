@@ -22,6 +22,7 @@ interface Methods {
 
 export interface Contact extends Methods {
   name?: string;
+  _id?: string;
   id?: string;
   email?: string;
   phone?: string;
@@ -32,6 +33,7 @@ interface Contacts extends Contact {
   contacts: ContactStateTypes[];
   current: Contact | null;
   filtered: ContactStateTypes[] | null;
+  error: string;
 }
 
 export interface ContactStateTypes extends Contacts {

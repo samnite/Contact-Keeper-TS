@@ -1,14 +1,37 @@
-import React, { FunctionComponent, useContext, useState } from 'react';
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import AlertContext from '../../context/alert/alert-context';
+import AuthContext from '../../context/auth/auth-context';
+import { History, LocationState } from 'history';
 
-interface OwnProps {}
+interface OwnProps {
+  history: History<LocationState>;
+}
 
 type Props = OwnProps;
 
 const Register: FunctionComponent<Props> = props => {
+  const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
   const { setAlert } = alertContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/');
+    }
+
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
+      clearErrors();
+    }
+    //es-lint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -28,7 +51,11 @@ const Register: FunctionComponent<Props> = props => {
     } else if (password !== password2) {
       setAlert('Password do not match', 'danger');
     } else {
-      console.log('Register submit');
+      register({
+        name,
+        email,
+        password
+      });
     }
   };
 

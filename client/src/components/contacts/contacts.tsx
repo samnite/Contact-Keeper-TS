@@ -23,12 +23,12 @@ const Contacts: FunctionComponent<Props> = () => {
       <TransitionGroup>
         {filtered !== null
           ? filtered.map(contact => (
-              <CSSTransition timeout={500} classNames="item" key={contact.id}>
+              <CSSTransition timeout={500} classNames="item" key={contact._id}>
                 <ContactItem contactItem={contact} />
               </CSSTransition>
             ))
           : contacts.map(contact => (
-              <CSSTransition timeout={500} classNames="item" key={contact.id}>
+              <CSSTransition timeout={500} classNames="item" key={contact._id}>
                 <ContactItem contactItem={contact} />
               </CSSTransition>
             ))}

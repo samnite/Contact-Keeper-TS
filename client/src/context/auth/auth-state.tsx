@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useReducer } from 'react';
-import AuthContext from './auth-context';
+import AuthContext, { FormDataTypes } from './auth-context';
 import authReducer from './auth-reducer';
+import setAuthToken from '../../utils/set-auth-token';
+import axios from 'axios';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -11,6 +13,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS
 } from '../types';
+import Config from '../../utils/config';
 
 interface OwnProps {
   children: any;
@@ -30,14 +33,60 @@ const AuthState = (props: Props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // Load User
-
+  const loadUser = async () => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    try {
+      const res = await axios.get('/api/auth');
+      dispatch({ type: USER_LOADED, payload: res.data });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
+    }
+  };
   // Register User
+  const register = async (formData: FormDataTypes) => {
+    // const config = {
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // };
 
-  // Login USer
+    try {
+      const res = await axios.post('/api/users', formData, Config);
+      dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg
+      });
+    }
+  };
 
+  // Login User
+  const login = async (formData: FormDataTypes) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/auth', formData, config);
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg
+      });
+    }
+  };
   // Logout
-
+  const logout = () => dispatch({ type: LOGOUT });
   // Clear Errors
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <AuthContext.Provider
@@ -46,7 +95,12 @@ const AuthState = (props: Props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
-        error: state.error
+        error: state.error,
+        register,
+        loadUser,
+        login,
+        logout,
+        clearErrors
       }}
     >
       {props.children}
