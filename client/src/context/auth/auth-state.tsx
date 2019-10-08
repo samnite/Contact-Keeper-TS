@@ -50,23 +50,24 @@ const AuthState = (props: Props) => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
       loadUser();
     } catch (err) {
-      dispatch({
-        type: REGISTER_FAIL,
-        payload: err.response.data.msg
-      });
+      if (err.response.data.errors) {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: err.response.data.errors[0].msg
+        });
+      } else {
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: err.response.data.msg
+        });
+      }
     }
   };
 
   // Login User
   const login = async (formData: FormDataTypes) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
     try {
-      const res = await axios.post('/api/auth', formData, config);
+      const res = await axios.post('/api/auth', formData, Config);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       loadUser();
     } catch (err) {
